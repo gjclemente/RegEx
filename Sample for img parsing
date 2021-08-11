@@ -1,0 +1,44 @@
+//grabs child of parent card that contains the image url
+
+        let image = $(this).children(".card-body-img");
+        //gets the img src attribute from the child element stored above
+        let url1 = $(image).children().attr('src');
+        //to test to make sure it logs the right img src path
+        console.log(url1);
+        
+        //use regex to parse url depending on naming convention of images and store in variables
+        //changes underscore to space and stores it to another var for sending values, use url1 to send image url for container in product.php
+        url2 = url1.replace(/_/g, " ");
+        console.log(url2);
+
+        //splits url at dash...use naming convention to separate data in url, saves as array to info. index 0 has product name (with higher directories), index 1 has fingood number
+        let info = url2.split(/\s*\-\s*///"g);
+        /*console.log(info);
+
+        //function to get rid of directories before product name...grabs any characters following the last slash
+        function removeSlash(data){
+            //regex stores first 2 directories in index 0, index 1 stores everything following
+            data = /.*[\/](.*)/.exec(data)[1];
+            return data;
+        }
+        
+        //invoke function to get just the product name in index 0
+        info[0] = removeSlash(info[0]);
+        console.log(info);
+
+        //function to get rid of IMG type at end of url
+        function removeIMGType(data){
+            data = /(.*)\./.exec(data)[1];
+            return data;
+        }
+        
+        //invoke function to get just the fingood in index 1
+        info[1] = removeIMGType(info[1]);
+        console.log(info);
+
+        //variables to be sent to product page
+        var productName = info[0];
+        var fingood = info[1];
+
+        //accesses the href of the card that was clicked and links it to the product page sending the above variables as type $_GET
+        $(this).attr("href", "product.php?name=" + productName + "&fingood=" + fingood);
