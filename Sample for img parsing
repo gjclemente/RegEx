@@ -1,4 +1,5 @@
-//grabs child of parent card that contains the image url
+<script>
+        //grabs child of parent card that contains the image url
 
         let image = $(this).children(".card-body-img");
         //gets the img src attribute from the child element stored above
@@ -42,3 +43,5 @@
 
         //accesses the href of the card that was clicked and links it to the product page sending the above variables as type $_GET
         $(this).attr("href", "product.php?name=" + productName + "&fingood=" + fingood);
+
+</script>
